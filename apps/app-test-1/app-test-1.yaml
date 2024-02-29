@@ -61,5 +61,5 @@ spec:
               number: 80
   tls:
   - hosts:
-    - aapp1.lazylab.page
+    - app1.lazylab.page
     secretName: app-test-1-tls-secret              
