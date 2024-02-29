@@ -45,15 +45,17 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: app-test2-ingress
+  name: app-test-2-ingress
   namespace: app-test-2
   annotations:
-    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+    kubernetes.io/ingress.class: "traefik"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    # This annotation is necessary if you're using Traefik as your ingress controller
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
 spec:
-  ingressClassName: traefik
   rules:
-  - http:
+  - host: app1.lazylab.pages
+    http:
       paths:
       - path: /
         pathType: Prefix
@@ -61,9 +63,8 @@ spec:
           service:
             name: app-test-2
             port:
-              name: http
-    host: app1.lazylab.page
+              number: 80
   tls:
   - hosts:
     - app1.lazylab.page
-    secretName: app-test-2-ingress-http
+    secretName: app-test-2-tls
