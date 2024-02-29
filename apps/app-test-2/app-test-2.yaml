@@ -54,7 +54,7 @@ metadata:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
 spec:
   rules:
-  - host: app1.lazylab.pages
+  - host: app1.lazylab.page
     http:
       paths:
       - path: /
